@@ -1,0 +1,21 @@
+#define PINO_POT 34
+#define PINO_LED 25
+
+int canal = 0;
+
+void setup() {
+  Serial.begin(115200);
+  ledcAttach(PINO_LED, 1000, 8);
+}
+
+void loop() {
+  int leitura = analogRead(PINO_POT);
+  int pwm = leitura / 16;
+
+  ledcWrite(PINO_LED, pwm);
+
+  Serial.print("PWM: ");
+  Serial.println(pwm);
+
+  delay(100);
+}
